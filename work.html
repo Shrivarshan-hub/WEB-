@@ -1,63 +1,108 @@
 <!DOCTYPE html>
 <html>
 <head>
-    <title>Student Work Page</title>
+    <title>Add Work</title>
+    <style>
+        body {
+            font-family: Arial;
+            background-color: #f2f2f2;
+            padding: 15px;
+        }
+        h2 {
+            color: #4a148c;
+        }
+        form {
+            background-color: white;
+            padding: 15px;
+            border-radius: 8px;
+            box-shadow: 0 0 8px rgba(0,0,0,0.1);
+            margin-bottom: 20px;
+        }
+        input, select {
+            padding: 8px;
+            margin: 5px 0;
+            width: 100%;
+        }
+        button {
+            background-color: #4a148c;
+            color: white;
+            border: none;
+            padding: 8px 15px;
+            border-radius: 5px;
+            cursor: pointer;
+        }
+        button:hover {
+            background-color: #6a1b9a;
+        }
+        table {
+            width: 100%;
+            border-collapse: collapse;
+        }
+        th, td {
+            border: 1px solid #ccc;
+            padding: 8px;
+        }
+        th {
+            background-color: #ede7f6;
+        }
+    </style>
 </head>
-<body bgcolor="#f9f9f9" style="font-family: Arial; padding: 20px;">
+<body>
 
-    <h2 style="color: #4a148c;">Add New Work</h2>
+<h2>Add Your Work</h2>
 
-    <form>
-        <label><b>Work Type:</b></label><br>
-        <select style="width: 98%; padding: 8px;">
-            <option>-- Select Work Type --</option>
-            <option>Assignment</option>
-            <option>Test</option>
-            <option>Project</option>
-        </select><br><br>
+<form id="workForm">
+    <label>Work Type:</label>
+    <select id="type" required>
+        <option value="Assignment">Assignment</option>
+        <option value="Test">Test</option>
+        <option value="Project">Project</option>
+    </select>
 
-        <label><b>Subject:</b></label><br>
-        <input type="text" placeholder="Enter subject" style="width: 98%; padding: 8px;"><br><br>
+    <label>Subject:</label>
+    <input type="text" id="subject" placeholder="Enter subject" required>
 
-        <label><b>Topic:</b></label><br>
-        <input type="text" placeholder="Enter topic" style="width: 98%; padding: 8px;"><br><br>
+    <label>Topic:</label>
+    <input type="text" id="topic" placeholder="Enter topic" required>
 
-        <label><b>Date:</b></label><br>
-        <input type="date" style="width: 98%; padding: 8px;"><br><br>
+    <label>Date:</label>
+    <input type="date" id="date" required>
 
-        <input type="submit" value="Add Work" style="background-color:#4a148c; color:white; padding:10px 20px; border:none;">
-    </form>
+    <button type="button" onclick="addWork()">Add Work</button>
+</form>
 
-    <hr>
+<h2>My Work List</h2>
+<table id="workTable">
+    <tr>
+        <th>Type</th>
+        <th>Subject</th>
+        <th>Topic</th>
+        <th>Date</th>
+    </tr>
+</table>
 
-    <h2 style="color: #4a148c;">My Work List</h2>
+<script>
+    function addWork() {
+        let type = document.getElementById("type").value;
+        let subject = document.getElementById("subject").value;
+        let topic = document.getElementById("topic").value;
+        let date = document.getElementById("date").value;
 
-    <table border="1" width="100%" cellspacing="0" cellpadding="8">
-        <tr bgcolor="#ede7f6">
-            <th>Type</th>
-            <th>Subject</th>
-            <th>Topic</th>
-            <th>Date</th>
-        </tr>
-        <tr>
-            <td>Assignment</td>
-            <td>Computer Science</td>
-            <td>HTML Basics</td>
-            <td>30 Oct 2025</td>
-        </tr>
-        <tr>
-            <td>Test</td>
-            <td>Mathematics</td>
-            <td>Probability</td>
-            <td>2 Nov 2025</td>
-        </tr>
-        <tr>
-            <td>Project</td>
-            <td>IoT</td>
-            <td>Automated Animal Feeder</td>
-            <td>10 Dec 2025</td>
-        </tr>
-    </table>
+        if (subject && topic && date) {
+            let table = document.getElementById("workTable");
+            let newRow = table.insertRow();
+
+            newRow.insertCell(0).innerText = type;
+            newRow.insertCell(1).innerText = subject;
+            newRow.insertCell(2).innerText = topic;
+            newRow.insertCell(3).innerText = date;
+
+            document.getElementById("workForm").reset();
+        } else {
+            alert("Please fill all fields!");
+        }
+    }
+</script>
 
 </body>
 </html>
